@@ -2,7 +2,7 @@
 using namespace std;
 
 int* insertion_sort(int* arr, int n){
-    int i, j, temp, trav=0, comp=0;
+    int i, j, temp, shifts=0, comp=0;
     int* ret = new int[2];
     for(i=1; i<n; ++i){
         if(arr[i]<arr[i-1]){
@@ -11,19 +11,19 @@ int* insertion_sort(int* arr, int n){
             while(j>=0 && arr[j]>temp){
                 arr[j+1]=arr[j];
                 --j;
-                ++trav;
+                ++shifts;
                 ++comp;
             } 
             arr[j+1]=tempval;
             ++shifts;
         }
     }
-    ret[0]=trav, ret[1]=comp;
+    ret[0]=shifts, ret[1]=comp;
     return ret;
 }
 
 int main(){
-    int t, n, i, trav, comp;
+    int t, n, i, shifts, comp;
     cin >> t;
     while(t){
         cin >> n;
@@ -32,12 +32,12 @@ int main(){
             cin >> arr[i];
         }
         int* ret = insertion_sort(arr, n);
-        trav= ret[0];
+        shifts= ret[0];
         comp = ret[1];
         for(i=0; i<n; ++i){
             cout << arr[i] << " ";
         }
-        cout << "\nComparisons = " << comp << "\nShifts = " << trav << endl;
+        cout << "\nComparisons = " << comp << "\nShifts = " << shifts << endl;
         free(ret);
         free(arr);
         --t;
